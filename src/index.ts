@@ -1,4 +1,6 @@
 #! /usr/bin/env node
+
+import { issueAssign } from "./commands/issueAssign";
 import { issueStatus } from "./commands/issueStatus";
 import program from "commander";
 import { openIssue } from "./commands/openIssue";
@@ -59,6 +61,11 @@ import { issueClose } from "./commands/issueClose";
       .command("status <issueId>")
       .description("Change issue status.")
       .action((issueId: string) => issueStatus(config!, issueId));
+
+    program
+      .command("assign <issueId>")
+      .description("Change issue assignee.")
+      .action((issueId: string) => issueAssign(config!, issueId));
 
     program
       .command("open [issue ID]")

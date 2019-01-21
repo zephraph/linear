@@ -54,11 +54,11 @@ linear comment ENG-123 --comment "This seems great."
 
 ### Change issue status
 
+Update issue's status through interactive prompt:
+
 ```
 linear status ENG-123
 ```
-
-TBA
 
 ### Close issue
 
@@ -70,11 +70,11 @@ linear close ENG-123
 
 ### Assign issue
 
+Update issue's assignee through interactive prompt:
+
 ```
 linear assign ENG-13
 ```
-
-TBA
 
 ## Development
 
