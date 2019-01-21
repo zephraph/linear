@@ -1,8 +1,6 @@
 import * as inquirer from "inquirer";
 import { createClient } from "../client";
 import ora from "ora";
-import { CONFIG_FILE } from "../constants";
-import chalk from "chalk";
 import { saveConfig, deleteConfig } from "../config";
 
 export const login = async () => {
@@ -28,8 +26,13 @@ export const login = async () => {
   spinner.stop();
 
   let projectId: string;
+  let projectKey: string;
+  let projectName: string;
   if (projects.length === 1) {
-    projectId = projects[0].id;
+    const { id, key, name } = projects[0];
+    projectId = id;
+    projectKey = key;
+    projectName = name;
   } else {
     const projectInput = await inquirer.prompt<{
       project: string;
@@ -46,6 +49,9 @@ export const login = async () => {
       }
     ]);
     projectId = projectInput.project;
+    const { key, name } = projects.find(project => project.id === projectId)!;
+    projectKey = key;
+    projectName = name;
   }
 
   const editorInput = await inquirer.prompt<{
@@ -62,6 +68,8 @@ export const login = async () => {
   saveConfig({
     token: input.apiKey,
     projectId,
+    projectName,
+    projectKey,
     editor: editorInput.editor
   });
 };

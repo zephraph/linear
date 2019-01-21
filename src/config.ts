@@ -5,6 +5,8 @@ import chalk from "chalk";
 export interface Config {
   token: string;
   projectId: string;
+  projectName: string;
+  projectKey: string;
   editor?: string;
 }
 

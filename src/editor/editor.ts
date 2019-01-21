@@ -22,13 +22,14 @@ export const readEditorContent = async (
   template?: string
 ): Promise<string | undefined> => {
   const filename = `/tmp/linear-${process.pid}.md`;
+
   if (template) {
     fs.writeFileSync(filename, template);
   }
   await startEditor(config, filename);
-  let content;
+
   try {
-    content = fs.readFileSync(filename);
+    const content = fs.readFileSync(filename);
     return trimContent(content.toString());
   } catch (err) {
     return;

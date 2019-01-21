@@ -8,8 +8,8 @@ import { createClient } from "../client";
 const issueTemplate = (
   title: string,
   project: string
-) => `# Please enter the issue summary and description. Lines starting with '#' will
-# be ignored, and an empty message aborts the issue creation.
+) => `# Please enter the issue summary and description.
+# Lines starting with '#' will be ignored.
 #
 # Issue details:
 #     title:   ${title}
@@ -46,12 +46,13 @@ export const newIssue = async (
     process.exit();
   }
 
-  // TODO: fetch project and title, or pull from cache
-
   let description =
     args.description ||
     (!args.skipInput &&
-      (await readEditorContent(config, issueTemplate(title, "[LIN] Linear"))));
+      (await readEditorContent(
+        config,
+        issueTemplate(title, `[${config.projectKey}] ${config.projectName}`)
+      )));
   description = description ? description : undefined;
 
   // Confirm
