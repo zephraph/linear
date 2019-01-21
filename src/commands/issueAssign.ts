@@ -8,7 +8,7 @@ import inquirer = require("inquirer");
 import _ from "lodash";
 
 /**
- * Change issue assingee.
+ * Change issue assignee.
  */
 export const issueAssign = async (config: Config, issueId: string) => {
   const linear = createClient(config);
@@ -25,7 +25,7 @@ export const issueAssign = async (config: Config, issueId: string) => {
     {
       type: "list",
       name: "id",
-      message: "Assing issue to:",
+      message: "Assign issue to:",
       choices: users.map(user => ({
         name: user.name,
         value: user.id,
