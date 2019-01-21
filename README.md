@@ -6,7 +6,7 @@ Command line tool to create Linear issues using your favorite editor.
 
 Install from NPM as global command:
 
-```bash
+```
 npm install @linear/cli -g
 
 # ...or with yarn:
@@ -16,7 +16,7 @@ yarn global add @linear/cli
 
 After installation you need to login and provide your developer key which can be create in [settings](https://linear.app/settings):
 
-```bash
+```
 linear login
 ```
 
@@ -28,27 +28,33 @@ If you need to change your settings later, you can use the same command or edit 
 
 Create new Linear issue with interactive prompts:
 
-```bash
+```
 linear issue
 ```
 
 If you want to create issue directly without user input:
 
-```bash
+```
 linear issue "New issue title" --description "More detailed description" --skipInput
 ```
 
 ### New comment
 
-```bash
+Create a new issue comment with your editor:
+
+```
 linear comment ENG-123
 ```
 
-TBA
+Create without editor:
+
+```
+linear comment ENG-123 --comment "This seems great."
+```
 
 ### Change issue status
 
-```bash
+```
 linear status ENG-123
 ```
 
@@ -56,13 +62,13 @@ TBA
 
 ## Move issue to in progress
 
-```bash
+```
 linear start ENG-123
 ```
 
 ### Mark issue as done
 
-```bash
+```
 linear done ENG-123
 ```
 
@@ -70,7 +76,7 @@ TBA
 
 ### Cancel issue
 
-```bash
+```
 linear cancel ENG-123
 ```
 
@@ -78,7 +84,7 @@ TBA
 
 ### Assign issue
 
-```bash
+```
 linear assign ENG-13
 ```
 
@@ -88,13 +94,13 @@ TBA
 
 Install dependencies:
 
-```bash
+```
 yarn
 ```
 
 Link the package locally and start development server:
 
-```bash
+```
 yarn link
 yarn dev
 ```
