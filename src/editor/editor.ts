@@ -41,11 +41,12 @@ export const readEditorContent = async (
  */
 const trimContent = (content: string) => {
   const rows = content.split("\n");
-  const result = [];
+  const result: string[] = [];
   rows.forEach(row => {
-    if (!row.startsWith("#")) {
+    if (!row.startsWith("# ") && row !== "#") {
       result.push(row);
     }
   });
-  return trim(rows.join("\n"));
+
+  return trim(result.join("\n"));
 };

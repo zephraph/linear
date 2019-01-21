@@ -4,16 +4,19 @@ import { openIssue } from "./commands/openIssue";
 import { loadConfig } from "./config";
 import { login, logout } from "./commands/auth";
 import { newIssue, NewIssueArgs } from "./commands/newIssue";
+import { CommentIssueArgs, issueComment } from "./commands/issueComment";
 
 (async () => {
   program.version(process.env.npm_package_version || "");
+
+  // Unauthenticated commands
 
   program
     .command("login")
     .description("Login to Linear")
     .action(login);
 
-  // Next up authenticated commands
+  // Authenticated commands
 
   const config = loadConfig();
   if (!config) {
@@ -32,6 +35,17 @@ import { newIssue, NewIssueArgs } from "./commands/newIssue";
       .description("Create a new issue")
       .action((title: string, args: NewIssueArgs) =>
         newIssue(config!, title, args)
+      );
+
+    program
+      .command("comment <issueId>")
+      .alias("c")
+      .option("--comment <comment>", "Comment")
+      .description(
+        "Comment on issue. If `--comment` is omitted, interactive comment composer is opened"
+      )
+      .action((issueId: string, args: CommentIssueArgs) =>
+        issueComment(config!, issueId, args)
       );
 
     program

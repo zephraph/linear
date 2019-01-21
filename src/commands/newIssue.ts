@@ -4,11 +4,12 @@ import ora from "ora";
 import { readEditorContent } from "../editor/editor";
 import { Config } from "../config";
 import { createClient } from "../client";
+import { printError } from "../messages";
 
 const issueTemplate = (
   title: string,
   project: string
-) => `# Please enter the issue summary and description.
+) => `# Please enter the issue description in markdown.
 # Lines starting with '#' will be ignored.
 #
 # Issue details:
@@ -31,6 +32,7 @@ export const newIssue = async (
   title: string,
   args: NewIssueArgs
 ) => {
+  // Issue title
   if (!title) {
     const input = await inquirer.prompt<TitleInput>([
       {
@@ -42,10 +44,11 @@ export const newIssue = async (
   }
 
   if (!title || trim(title).length === 0) {
-    console.log("No title, aborting...");
+    printError("No title, aborting...");
     process.exit();
   }
 
+  // Description
   let description =
     args.description ||
     (!args.skipInput &&
@@ -70,10 +73,11 @@ export const newIssue = async (
     }
   }
 
+  // Create issue
   const spinner = ora("Creating issue...").start();
   try {
     const linear = createClient(config);
-    const issueData = await linear.mutation.issueCreate(
+    const issueData = await linear.client.mutation.issueCreate(
       {
         input: {
           title,
@@ -88,6 +92,6 @@ export const newIssue = async (
     console.log(`Issue created:`, { issueData });
   } catch (err) {
     spinner.stop();
-    console.error(err.message);
+    printError("Unable to create issue.");
   }
 };
