@@ -1,10 +1,12 @@
 #! /usr/bin/env node
+import { issueStatus } from "./commands/issueStatus";
 import program from "commander";
 import { openIssue } from "./commands/openIssue";
 import { loadConfig } from "./config";
 import { login, logout } from "./commands/auth";
 import { newIssue, NewIssueArgs } from "./commands/newIssue";
 import { CommentIssueArgs, issueComment } from "./commands/issueComment";
+import { issueClose } from "./commands/issueClose";
 
 (async () => {
   program.version(process.env.npm_package_version || "");
@@ -47,6 +49,16 @@ import { CommentIssueArgs, issueComment } from "./commands/issueComment";
       .action((issueId: string, args: CommentIssueArgs) =>
         issueComment(config!, issueId, args)
       );
+
+    program
+      .command("close <issueId>")
+      .description("Mark issue as done.")
+      .action((issueId: string) => issueClose(config!, issueId));
+
+    program
+      .command("status <issueId>")
+      .description("Change issue status.")
+      .action((issueId: string) => issueStatus(config!, issueId));
 
     program
       .command("open [issue ID]")

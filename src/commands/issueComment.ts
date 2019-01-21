@@ -3,7 +3,7 @@ import { readEditorContent } from "../editor/editor";
 import ora = require("ora");
 import { createClient } from "../client";
 import { Issue } from "@linear/sdk/dist/generated-binding";
-import { printError } from "../messages";
+import { printError, printSuccess } from "../messages";
 
 const commentTemplate = (
   issueTitle: string
@@ -55,6 +55,7 @@ export const issueComment = async (
       "{ comment { id } }"
     );
     spinner.stop();
+    printSuccess(`Comment posted.`);
   } catch (err) {
     printError("Unable to create comment.");
     process.exit();

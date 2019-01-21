@@ -15,13 +15,16 @@ class LinearClient {
     return new Linear({ token: this.token });
   }
 
-  public getIssue = async (issueId: string): Promise<Issue> => {
+  public getIssue = async (issueId: string, info?: string): Promise<Issue> => {
     let issue: Issue;
     try {
       const spinner = ora().start();
-      issue = await this.client.query.issue({
-        id: issueId
-      });
+      issue = await this.client.query.issue(
+        {
+          id: issueId
+        },
+        info
+      );
       spinner.stop();
       return issue;
     } catch (err) {

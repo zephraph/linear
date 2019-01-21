@@ -60,27 +60,13 @@ linear status ENG-123
 
 TBA
 
-## Move issue to in progress
+### Close issue
+
+Mark issue as done:
 
 ```
-linear start ENG-123
+linear close ENG-123
 ```
-
-### Mark issue as done
-
-```
-linear done ENG-123
-```
-
-TBA
-
-### Cancel issue
-
-```
-linear cancel ENG-123
-```
-
-TBA
 
 ### Assign issue
 

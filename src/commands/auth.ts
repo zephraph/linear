@@ -22,7 +22,7 @@ export const login = async () => {
 
   const linear = createClient({ token: input.apiKey });
   const spinner = ora().start();
-  const projects = await linear.query.projects();
+  const projects = await linear.client.query.projects();
   spinner.stop();
 
   let projectId: string;
