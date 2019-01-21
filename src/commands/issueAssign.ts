@@ -1,5 +1,4 @@
 import { Config } from "../config";
-import { readEditorContent } from "../editor/editor";
 import ora = require("ora");
 import { createClient } from "../client";
 import { Issue } from "@linear/sdk/dist/generated-binding";
