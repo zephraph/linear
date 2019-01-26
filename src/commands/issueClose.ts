@@ -13,8 +13,8 @@ export const issueClose = async (config: Config, issueId: string) => {
   let issue = await linear.getIssue(issueId);
 
   // Change status to first completed state.
+  const spinner = ora().start();
   try {
-    const spinner = ora().start();
     await linear.client.mutation.issueClose(
       {
         id: issue.id
@@ -24,6 +24,7 @@ export const issueClose = async (config: Config, issueId: string) => {
     spinner.stop();
     printSuccess(`${issueId} marked as done.`);
   } catch (err) {
+    spinner.stop();
     printError("Unable to change status.");
     process.exit();
   }

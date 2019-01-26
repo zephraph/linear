@@ -4,19 +4,16 @@ import ora from "ora";
 import { readEditorContent } from "../editor/editor";
 import { Config } from "../config";
 import { createClient } from "../client";
-import { printError } from "../messages";
+import { printError, printSuccess } from "../messages";
 
-const issueTemplate = (
-  title: string,
-  project: string
-) => `# Please enter the issue description in markdown.
+const issueTemplate = (title: string, project: string) => `
+
+# Please enter the issue description in markdown.
 # Lines starting with '#' will be ignored.
 #
 # Issue details:
 #     title:   ${title}
-#     project: ${project}
-
-`;
+#     project: ${project}`;
 
 export interface NewIssueArgs {
   description?: string;
@@ -48,9 +45,9 @@ export const newIssue = async (
     process.exit();
   }
 
-  // Description
+  // Description (args.description is a function if not set)
   let description =
-    args.description ||
+    (typeof args.description === "string" && args.description) ||
     (!args.skipInput &&
       (await readEditorContent(
         config,
@@ -59,7 +56,7 @@ export const newIssue = async (
   description = description ? description : undefined;
 
   // Confirm
-  if (args.skipInput === undefined) {
+  if (!args.skipInput) {
     const input = await inquirer.prompt<{ confirm: boolean }>([
       {
         type: "confirm",
@@ -82,14 +79,16 @@ export const newIssue = async (
         input: {
           title,
           description,
-          boardOrder: 0,
-          projectId: ""
+          projectId: config.projectId
         }
       },
-      "{ issue { id number project { key } } }"
+      "{ issue { id number title project { key } } }"
     );
     spinner.stop();
-    console.log(`Issue created:`, { issueData });
+    const issue = issueData.issue!;
+    printSuccess(
+      `Issue created: ${issue.project.key}-${issue.number} ${issue.title}`
+    );
   } catch (err) {
     spinner.stop();
     printError("Unable to create issue.");

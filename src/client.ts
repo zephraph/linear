@@ -17,8 +17,8 @@ class LinearClient {
 
   public getIssue = async (issueId: string, info?: string): Promise<Issue> => {
     let issue: Issue;
+    const spinner = ora().start();
     try {
-      const spinner = ora().start();
       issue = await this.client.query.issue(
         {
           id: issueId
@@ -28,6 +28,7 @@ class LinearClient {
       spinner.stop();
       return issue;
     } catch (err) {
+      spinner.stop();
       console.log(chalk.red("Unknown issue."));
       process.exit();
     }
