@@ -1,49 +1,78 @@
-import { Binding, BindingInstance } from "./generated-binding";
-import { HttpLink } from "apollo-link-http";
-import { onError } from "apollo-link-error";
-import * as fetch from "isomorphic-fetch";
-import { makeRemoteExecutableSchema } from "graphql-tools";
-import linearSchema from "./linearSchema";
-import { GraphQLError } from "graphql";
+#! /usr/bin/env node
 
-export interface LinearLinkOptions {
-  token: string;
-}
+import { issueAssign } from "./commands/issueAssign";
+import { issueStatus } from "./commands/issueStatus";
+import program from "commander";
+import { openIssue } from "./commands/openIssue";
+import { loadConfig } from "./config";
+import { login, logout } from "./commands/auth";
+import { newIssue, NewIssueArgs } from "./commands/newIssue";
+import { CommentIssueArgs, issueComment } from "./commands/issueComment";
+import { issueClose } from "./commands/issueClose";
 
-export class LinearLink extends HttpLink {
-  constructor(options: LinearLinkOptions) {
-    if (!options.token) {
-      throw new Error(
-        "No Linear developer key provided. Create one here: https://linear.app/settings"
+(async () => {
+  program.version(process.env.npm_package_version || "");
+
+  // Unauthenticated commands
+
+  program
+    .command("login")
+    .description("Login to Linear")
+    .action(login);
+
+  // Authenticated commands
+
+  const config = loadConfig();
+  if (!config) {
+    await login;
+  } else {
+    program
+      .command("logout")
+      .description("Logout session")
+      .action(logout);
+
+    program
+      .command("issue [title]")
+      .alias("i")
+      .option("--description <description>", "Issue description")
+      .option("--skipInput", "Skip user input (title required)")
+      .description("Create a new issue")
+      .action((title: string, args: NewIssueArgs) =>
+        newIssue(config!, title, args)
       );
-    }
-    super({
-      uri: "https://api.linear.app/graphql",
-      headers: { Authorization: options.token },
-      fetch
-    });
+
+    program
+      .command("comment <issueId>")
+      .alias("c")
+      .option("--comment <comment>", "Comment")
+      .description(
+        "Comment on issue. If `--comment` is omitted, interactive comment composer is opened"
+      )
+      .action((issueId: string, args: CommentIssueArgs) =>
+        issueComment(config!, issueId, args)
+      );
+
+    program
+      .command("close <issueId>")
+      .description("Mark issue as done.")
+      .action((issueId: string) => issueClose(config!, issueId));
+
+    program
+      .command("status <issueId>")
+      .description("Change issue status.")
+      .action((issueId: string) => issueStatus(config!, issueId));
+
+    program
+      .command("assign <issueId>")
+      .description("Change issue assignee.")
+      .action((issueId: string) => issueAssign(config!, issueId));
+
+    program
+      .command("open [issue ID]")
+      .alias("o")
+      .description("Opens issue in the browser")
+      .action(openIssue);
   }
-}
 
-// https://github.com/graphql-binding/graphql-binding/issues/173#issuecomment-446366548
-const errorLink = onError(args => {
-  if (args.graphQLErrors && args.graphQLErrors.length === 1) {
-    args.response.errors = args.graphQLErrors.concat(new GraphQLError(""));
-  }
-});
-
-class LinearBinding extends Binding {
-  constructor(options: LinearLinkOptions) {
-    const schema = makeRemoteExecutableSchema({
-      schema: linearSchema,
-      link: errorLink.concat(new LinearLink(options))
-    });
-    super({ schema });
-  }
-}
-
-export interface BindingConstructor<T> {
-  new (options: LinearLinkOptions): T;
-}
-
-export const Linear = LinearBinding as BindingConstructor<BindingInstance>;
+  program.parse(process.argv);
+})();

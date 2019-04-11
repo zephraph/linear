@@ -1,59 +1,98 @@
-# @linear/sdk
+# @linear/cli
 
-Node library for querying Linear's API and creating new issues and tasks. It's a light wrapper around Linear's GraphQL API and ships with Typescript types out of the box.
+Command line tool to create Linear issues using your favorite editor.
+
+## Installation
+
+Install from NPM as global command:
+
+```
+npm install @linear/cli -g
+
+# ...or with yarn:
+
+yarn global add @linear/cli
+```
+
+After installation you need to login and provide your developer key which can be create in [settings](https://linear.app/settings):
+
+```
+linear login
+```
+
+If you need to change your settings later, you can use the same command or edit `.linearrc` from your home folder. To use VS Code as editor, you need to set it to wait similar to when using with `git`: `code --wait`
 
 ## Usage
 
+### New issue
+
+Create new Linear issue with interactive prompts:
+
 ```
-yarn install @linear/sdk
-```
-
-```js
-import { Linear } from "@linear/sdk";
-
-const linear = new Linear({
-  token: "<your developer key>"
-});
-
-// Making a query
-const projects = await linear.query.projects();
-
-// Creating a new issue through mutation with return value
-const newIssue = await linear.mutation.issueCreate(
-  {
-    input: {
-      projectId: projects[0].id,
-      title: "Serious bug"
-    }
-  },
-  `
-{
-  issue {
-    id
-  }
-}
-`
-);
+linear issue
 ```
 
-If you want to be more specific on return values with your queries, you can also pass GraphQL query with the query call:
+If you want to create issue directly without user input:
 
-```js
-// Get project id for an issue
-const issue = await linear.getIssue(issueId, "{ id project { id } }");
-console.log(issue.project.id);
-
-// Fetch project states with associated projects ids
-const states = await linear.client.query.projectStates(
-  {},
-  `{ id name project { id } }`
-);
+```
+linear issue "New issue title" --description "More detailed description" --skipInput
 ```
 
-## Documentation
+### New comment
 
-- **[API reference](https://github.com/linearapp/linear-node-sdk/blob/master/schema.md)**
+Create a new issue comment with your editor:
+
+```
+linear comment ENG-123
+```
+
+Create without editor:
+
+```
+linear comment ENG-123 --comment "This seems great."
+```
+
+### Change issue status
+
+Update issue's status through interactive prompt:
+
+```
+linear status ENG-123
+```
+
+### Close issue
+
+Mark issue as done:
+
+```
+linear close ENG-123
+```
+
+### Assign issue
+
+Update issue's assignee through interactive prompt:
+
+```
+linear assign ENG-13
+```
+
+## Development
+
+Install dependencies:
+
+```
+yarn
+```
+
+Link the package locally and start development server:
+
+```
+yarn link
+yarn dev
+```
+
+After development server is running, you'll be able to test the CLI by running `linear` like it would be installed globally.
 
 ## License
 
-[MIT](https://github.com/linearapp/linear-node-sdk/blob/master/LICENSE.md)
+MIT
