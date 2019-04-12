@@ -13,44 +13,27 @@
       "**/dist/*": true
     },
     "editor.rulers": [120],
-    "tslint.autoFixOnSave": [
-      "array-type",
-      "arrow-return-shorthand",
-      "curly",
-      "member-access",
-      "member-ordering",
-      "no-null-keyword",
-      "no-string-literal",
-      "no-unnecessary-initializer",
-      "no-unnecessary-type-assertion",
-      "no-var-keyword",
-      "ordered-imports",
-      "prefer-const",
-      "prefer-method-signature",
-      "triple-equals"
-    ],
     "files.exclude": {
       "**/.git": true,
       "**/.svn": true,
       "**/.DS_Store": true,
       "**/build": true,
       "**/dist": true,
-      "**/node_modules": true
+      "**/node_modules": true,
+      "**/*.tsbuildinfo": true
     },
-    "cSpell.language": "en",
-    "tslint.packageManager": "yarn"
+    "cSpell.language": "en"
   },
   "extensions": {
     "recommendations": [
       "christian-kohler.path-intellisense",
-      "eg2.tslint",
+      "eamodio.gitlens",
       "esbenp.prettier-vscode",
+      "jpoissonnier.vscode-styled-components",
+      "ms-vscode.vscode-typescript-tslint-plugin",
       "robinbentley.sass-indented",
       "steoates.autoimport",
-      "streetsidesoftware.code-spell-checker",
-      "jpoissonnier.vscode-styled-components",
-      "eamodio.gitlens",
-      "ms-vscode.vscode-typescript-tslint-plugin"
+      "streetsidesoftware.code-spell-checker"
     ]
   },
   "launch": {
@@ -60,8 +43,8 @@
         "type": "extensionHost",
         "request": "launch",
         "runtimeExecutable": "${execPath}",
-        "preLaunchTask": "watch",
-        "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+        "preLaunchTask": null,
+        "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-plugin"],
         "outFiles": ["${workspaceFolder}/packages/vscode-plugin/dist/**/*.js"]
       }
     ],

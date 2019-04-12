@@ -12,13 +12,11 @@ export interface LinearLinkOptions {
 export class LinearLink extends HttpLink {
   public constructor(options: LinearLinkOptions) {
     if (!options.token) {
-      throw new Error(
-        "No Linear developer key provided. Create one here: https://linear.app/settings"
-      );
+      throw new Error("No Linear developer key provided. Create one here: https://linear.app/settings");
     }
     super({
       uri: "https://api.linear.app/graphql",
-      headers: { Authorization: options.token }
+      headers: { Authorization: options.token },
     });
   }
 }
@@ -34,7 +32,7 @@ class LinearBinding extends Binding {
   public constructor(options: LinearLinkOptions) {
     const schema = makeRemoteExecutableSchema({
       schema: linearSchema,
-      link: errorLink.concat(new LinearLink(options))
+      link: errorLink.concat(new LinearLink(options)),
     });
     super({ schema });
   }
@@ -45,5 +43,6 @@ export interface BindingConstructor<T> {
 }
 
 export const Linear = LinearBinding as BindingConstructor<BindingInstance>;
+export * from "./linearSchema";
 
 export * from "./generated-binding";

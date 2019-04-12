@@ -3,8 +3,29 @@
   "displayName": "linear-vscode",
   "description": "Linear in VSCode",
   "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.30.0"
+  "scripts": {
+    "vscode:prepublish": "yarn run build",
+    "build": "tsc -b",
+    "watch": "tsc -b --watch",
+    "test": "yarn run compile && node ./node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@linear/sdk": "^0.0.3",
+    "apollo-link-error": "^1.1.5",
+    "apollo-link-http": "1.5.9",
+    "cross-fetch": "3.0.0",
+    "graphql": "14.1.1",
+    "graphql-tools": "4.0.3",
+    "isomorphic-fetch": "2.2.1",
+    "module": "1.2.5"
+  },
+  "devDependencies": {
+    "@types/graphql": "14.0.4",
+    "@types/isomorphic-fetch": "0.0.34",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^8.10.25",
+    "typescript": "3.4.3",
+    "vscode": "1.1.33"
   },
   "categories": [
     "Other"
@@ -13,7 +34,7 @@
     "onCommand:extension.helloWorld",
     "onView:linearIssues"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
@@ -33,27 +54,7 @@
       ]
     }
   },
-  "scripts": {
-    "vscode:prepublish": "yarn run build",
-    "build": "tsc -b",
-    "watch": "tsc -b --watch",
-    "test": "yarn run compile && node ./node_modules/vscode/bin/test"
-  },
-  "dependencies": {
-    "apollo-link-error": "^1.1.5",
-    "apollo-link-http": "1.5.9",
-    "cross-fetch": "3.0.0",
-    "graphql": "14.1.1",
-    "graphql-tools": "4.0.3",
-    "isomorphic-fetch": "2.2.1",
-    "module": "1.2.5"
-  },
-  "devDependencies": {
-    "@types/graphql": "14.0.4",
-    "@types/isomorphic-fetch": "0.0.34",
-    "@types/mocha": "^2.2.42",
-    "@types/node": "^8.10.25",
-    "vscode": "1.1.33",
-    "typescript": "3.4.3"
+  "engines": {
+    "vscode": "^1.30.0"
   }
 }

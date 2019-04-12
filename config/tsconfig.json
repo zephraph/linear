@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es5", "dom", "esnext.asynciterable"],
+    "lib": ["es2015", "dom", "esnext.asynciterable"],
     "module": "es2015",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -21,11 +21,5 @@
     "target": "es5",
     "incremental": true
   },
-  "exclude": [
-    "../**/node_modules",
-    "../**/build",
-    "../**/dist",
-    "./**/scripts",
-    "./**/jest"
-  ]
+  "exclude": ["../**/node_modules", "../**/build", "../**/dist", "./**/scripts", "./**/jest"]
 }

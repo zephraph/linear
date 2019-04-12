@@ -2,17 +2,20 @@ import * as vscode from "vscode";
 import { Linear } from "./sdk/index";
 
 export class IssuesNodeProvider implements vscode.TreeDataProvider<Issue> {
-  public readonly onDidChangeTreeData: vscode.Event<Issue | undefined> = this._onDidChangeTreeData.event;
+  public readonly onDidChangeTreeData: vscode.Event<Issue | undefined>;
 
   public constructor() {
-    /*this.linear = new Linear({
-      token: ""
-    });*/
+    this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+    this.linear = new Linear({
+      token: "cl1Sjj2CNQ9bzuO0ohlduGOWON9FGUw313bay6KR",
+    });
+    // TODO: Revoke this key once auth is in
   }
 
   public refresh(): void {
     this._onDidChangeTreeData.fire();
-    //const projects = this.linear.query.projects();
+    const projects = this.linear.query.projects();
+    console.log(projects);
   }
 
   public getTreeItem(element: Issue): vscode.TreeItem {
@@ -29,7 +32,7 @@ export class IssuesNodeProvider implements vscode.TreeDataProvider<Issue> {
 
   private _onDidChangeTreeData: vscode.EventEmitter<Issue | undefined> = new vscode.EventEmitter<Issue | undefined>();
 
-  //private linear: Linear;
+  private linear: Linear;
 }
 
 export class Issue extends vscode.TreeItem {

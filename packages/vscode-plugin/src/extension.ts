@@ -5,7 +5,7 @@ export function activate(context: vscode.ExtensionContext) {
   const nodeDependenciesProvider = new IssuesNodeProvider();
   vscode.window.registerTreeDataProvider("linearIssues", nodeDependenciesProvider);
 
-  let disposable = vscode.commands.registerCommand("extension.helloWorld", () => {
+  const disposable = vscode.commands.registerCommand("extension.helloWorld", () => {
     vscode.window.showInformationMessage("Hello World!");
     //vscode.commands.executeCommand('vscode.open', vscode.Uri.parse('http://www.pinkbike.com/news/fail-of-the-month-june-2016.html'));
   });
