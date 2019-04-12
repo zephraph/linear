@@ -8,7 +8,6 @@
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.mjs",
   "source": "src/index.ts",
-  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "update-schema": "graphql get-schema -p default",
@@ -24,7 +23,7 @@
   "dependencies": {
     "@types/graphql": "14.0.4",
     "@types/isomorphic-fetch": "0.0.34",
-    "apollo-link-error": "^1.1.5",
+    "apollo-link-error": "1.1.5",
     "apollo-link-http": "1.5.9",
     "cross-fetch": "3.0.0",
     "graphql": "14.1.1",
@@ -37,6 +36,6 @@
     "graphql-cli": "3.0.4",
     "graphql-markdown": "5.0.1",
     "microbundle": "0.9.0",
-    "typescript": "3.2.2"
+    "typescript": "3.4.3"
   }
 }

@@ -1,7 +1,9 @@
 import { makeExecutableSchema } from "graphql-tools";
+import { GraphQLSchema } from "graphql";
 import linearSchema from "./linearSchema";
-var schema = makeExecutableSchema({
-    typeDefs: linearSchema
+
+const schema: GraphQLSchema = makeExecutableSchema({
+  typeDefs: linearSchema
 });
+
 export default schema;
-//# sourceMappingURL=schema.js.map
