@@ -1,0 +1,56 @@
+{
+  "folders": [
+    {
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/build/*": true,
+      "**/dist/*": true,
+    },
+    "editor.rulers": [120],
+    "tslint.autoFixOnSave": [
+      "array-type",
+      "arrow-return-shorthand",
+      "curly",
+      "member-access",
+      "member-ordering",
+      "no-null-keyword",
+      "no-string-literal",
+      "no-unnecessary-initializer",
+      "no-unnecessary-type-assertion",
+      "no-var-keyword",
+      "ordered-imports",
+      "prefer-const",
+      "prefer-method-signature",
+      "triple-equals"
+    ],
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.DS_Store": true,
+      "**/build": true,
+      "**/dist": true,
+      "**/node_modules": true,
+    },
+    "cSpell.language": "en",
+    "tslint.packageManager": "yarn"
+  },
+  "extensions": {
+    "recommendations": [
+      "christian-kohler.path-intellisense",
+      "eg2.tslint",
+      "esbenp.prettier-vscode",
+      "robinbentley.sass-indented",
+      "steoates.autoimport",
+      "streetsidesoftware.code-spell-checker",
+      "jpoissonnier.vscode-styled-components",
+      "eamodio.gitlens",
+      "ms-vscode.vscode-typescript-tslint-plugin"
+    ]
+  }
+}
