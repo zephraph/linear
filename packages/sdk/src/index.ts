@@ -45,4 +45,5 @@ export interface BindingConstructor<T> {
 }
 
 export const Linear = LinearBinding as BindingConstructor<BindingInstance>;
-export * from "./linearSchema";
+
+export * from "./generated-binding";

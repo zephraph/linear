@@ -10,10 +10,11 @@
   "source": "src/index.ts",
   "license": "MIT",
   "scripts": {
+    "build": "tsc -b",
     "update-schema": "graphql get-schema -p default",
     "generate": "graphql codegen",
     "docs": "graphql-markdown ./src/schema.graphql > schema.md",
-    "build": "microbundle",
+    "bundle": "microbundle",
     "dev": "microbundle watch"
   },
   "resolutions": {
@@ -21,17 +22,17 @@
     "module": "1.2.5"
   },
   "dependencies": {
-    "@types/graphql": "14.0.4",
-    "@types/isomorphic-fetch": "0.0.34",
     "apollo-link-error": "1.1.5",
     "apollo-link-http": "1.5.9",
     "cross-fetch": "3.0.0",
-    "graphql": "14.1.1",
     "graphql-tools": "4.0.3",
+    "graphql": "14.1.1",
     "isomorphic-fetch": "2.2.1",
     "module": "1.2.5"
   },
   "devDependencies": {
+    "@types/graphql": "14.0.4",
+    "@types/isomorphic-fetch": "0.0.34",
     "graphql-binding": "2.4.1",
     "graphql-cli": "3.0.4",
     "graphql-markdown": "5.0.1",
