@@ -13,7 +13,12 @@
     "jsx-no-string-ref": false,
     "jsx-self-close": false,
     "linebreak-style": false,
-    "member-access": [true, "check-accessor", "check-constructor", "check-parameter-property"],
+    "member-access": [
+      true,
+      "check-accessor",
+      "check-constructor",
+      "check-parameter-property"
+    ],
     "member-ordering": [
       true,
       {
@@ -32,7 +37,7 @@
     ],
     "no-any": true,
     "no-arg": true,
-    "no-console": true,
+    "no-console": false,
     "no-debugger": true,
     "no-duplicate-imports": true,
     "no-duplicate-super": true,
@@ -52,7 +57,11 @@
     "no-unnecessary-initializer": true,
     "no-var-keyword": true,
     "no-var-requires": true,
-    "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
+    ],
     "ordered-imports": true,
     "prefer-conditional-expression": true,
     "prefer-const": true,
@@ -62,7 +71,13 @@
     "triple-equals": true,
     "typedef": [true, "parameter", "property-declaration"],
     "unified-signatures": true,
-    "variable-name": [true, "allow-leading-underscore", "ban-keywords", "check-format", "allow-pascal-case"]
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case"
+    ]
   },
   "linterOptions": {
     "exclude": ["**/node_modules"]
