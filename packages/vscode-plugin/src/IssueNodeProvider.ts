@@ -1,5 +1,5 @@
+import { Linear } from "@linear/sdk";
 import * as vscode from "vscode";
-import { Linear } from "./sdk/index";
 
 export class IssuesNodeProvider implements vscode.TreeDataProvider<Issue> {
   public readonly onDidChangeTreeData: vscode.Event<Issue | undefined>;

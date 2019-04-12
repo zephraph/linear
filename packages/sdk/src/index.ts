@@ -2,7 +2,8 @@ import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { GraphQLError } from "graphql";
 import { makeRemoteExecutableSchema } from "graphql-tools";
-import { Binding, BindingInstance } from "./generated-binding";
+import fetch from "node-fetch";
+import { Binding } from "./generated-binding";
 import linearSchema from "./linearSchema";
 
 export interface LinearLinkOptions {
@@ -17,6 +18,8 @@ export class LinearLink extends HttpLink {
     super({
       uri: "https://api.linear.app/graphql",
       headers: { Authorization: options.token },
+      // tslint:disable-next-line: no-any
+      fetch: fetch as any,
     });
   }
 }
@@ -28,7 +31,7 @@ const errorLink = onError(args => {
   }
 });
 
-class LinearBinding extends Binding {
+export class Linear extends Binding {
   public constructor(options: LinearLinkOptions) {
     const schema = makeRemoteExecutableSchema({
       schema: linearSchema,
@@ -42,7 +45,5 @@ export interface BindingConstructor<T> {
   new (options: LinearLinkOptions): T;
 }
 
-export const Linear = LinearBinding as BindingConstructor<BindingInstance>;
 export * from "./linearSchema";
-
 export * from "./generated-binding";

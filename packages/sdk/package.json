@@ -22,12 +22,14 @@
     "module": "1.2.5"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.3.2",
     "apollo-link-error": "1.1.5",
     "apollo-link-http": "1.5.9",
     "cross-fetch": "3.0.0",
     "graphql": "14.1.1",
     "isomorphic-fetch": "2.2.1",
-    "module": "1.2.5"
+    "module": "1.2.5",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "@types/graphql": "14.0.4",
