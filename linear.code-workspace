@@ -44,8 +44,8 @@
         "request": "launch",
         "runtimeExecutable": "${execPath}",
         "preLaunchTask": null,
-        "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-plugin"],
-        "outFiles": ["${workspaceFolder}/packages/vscode-plugin/dist/**/*.js"]
+        "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"],
+        "outFiles": ["${workspaceFolder}/packages/vscode-extension/dist/**/*.js"]
       }
     ],
     "compounds": []

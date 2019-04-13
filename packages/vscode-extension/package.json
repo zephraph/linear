@@ -36,12 +36,42 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "nodeDependencies.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "nodeDependencies.branch",
+        "title": "Branch"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nodeDependencies.refreshEntry",
+          "when": "view == nodeDependencies",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "nodeDependencies.branch",
+          "when": "view == nodeDependencies && viewItem == dependency",
+          "group": "inline"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
           "id": "linear-issues",
           "title": "Linear",
-          "icon": "assets/linear.svg"
+          "icon": "resources/linear.svg"
         }
       ]
     },
