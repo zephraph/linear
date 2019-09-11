@@ -1,6 +1,7 @@
 {
   "extends": "../../config/tsconfig",
   "compilerOptions": {
+    "baseUrl": "./src",
     "composite": true,
     "outDir": "./dist",
     "resolveJsonModule": true,
